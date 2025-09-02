@@ -7,11 +7,16 @@ const Footer = () => {
   const [subscribeUser, {isSuccess, isLoading, error}] = useSubscribeUserMutation()
 
   const submitHandler = async (e) => {
-    e.preventDefault()
-    if(!email) return;
-    await subscribeUser(email)
-    setEmail("")
-  }
+    e.preventDefault();
+    if (!email) return;
+
+    try {
+      await subscribeUser(email)
+      setEmail(""); // clear form
+    } catch (err) {
+      console.error("Subscription failed:", err);
+    }
+  };
   
 
   return (
@@ -45,7 +50,7 @@ const Footer = () => {
               
             </form>
             {isSuccess && <p className="text-sm text-green-600 mt-2 text-center">Subscription successful..</p>}
-              {error && <p className="text-dm text-red-500 mt-2 text-center">{error.data?.message || "something went wrong"} </p>}
+              {error && <p className="text-sm text-red-500 mt-2 text-center">{error.data?.message || "something went wrong"} </p>}
           </div>
         </div>
         <div className="border-t border-gray-600 pt-4 flex flex-col md:flex-row lg:flex-row justify-between items-center">

@@ -1,8 +1,8 @@
-import express from "express"
-import { addSubscription } from "../controllers/subscribeController.js"
+import express from "express";
+import { addSubscription } from "../controllers/subscribeController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/subscribe", addSubscription)
+router.post("/subscribe", addSubscription);
 
-export default router
+export default router;

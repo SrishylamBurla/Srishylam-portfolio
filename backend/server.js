@@ -1,40 +1,41 @@
+import express from "express";
 import mongoose from "mongoose";
-import express from "express"
-import dotenv from "dotenv"
-dotenv.config()
-import cors from 'cors'
-import subscribeRouter from "./routes/subscribeRoute.js"
+import dotenv from "dotenv";
+import cors from "cors";
+import subscribeRoute from "./routes/subscribeRoute.js";
 
-const PORT = process.env.PORT || 5000
+dotenv.config();
 
-const app = express()
-app.use(express.json())
+const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+
+const app = express();
+
+app.use(express.json());
+const allowedOrigins = ['http://localhost:3000', 'https://srishylam-portfolio-2722.vercel.app/'];
 
 app.use(cors({
-  origin: ["https://srishylam-portfolio-2722.vercel.app"], // your frontend URL
-  methods: ["GET", "POST"],
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 
 
-const connectDB = () =>{
-    mongoose.connect(process.env.MONGO_URI)
-    .then(()=>{
-        console.log("Database connected...");
-    })
-    .catch((err)=>{
-        console.log("database connection failed..", err);
-    })
-}
-connectDB()
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ DB connection error:", err));
 
-app.get("/", (req, res)=>{
-    res.send("Api running...")
-})
+app.get("/", (req, res) => {
+  res.send("API running...");
+});
 
-app.use("/api", subscribeRouter)
+app.use("/api", subscribeRoute);
 
-
-app.listen(PORT, ()=>{
-    console.log(`server is running on port ${PORT}`);
-})
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
