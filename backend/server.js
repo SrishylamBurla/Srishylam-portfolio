@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json())
 
 app.use(cors({
-  origin: ["https://srishylam-portfolio.vercel.app"], // your frontend URL
+  origin: ["https://srishylam-portfolio-2722.vercel.app"], // your frontend URL
   methods: ["GET", "POST"],
   credentials: true
 }));
