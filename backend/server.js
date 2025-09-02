@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:3000', // or your deployed frontend
+  origin: 'https://srishylam-portfolio-2722.vercel.app', // or your deployed frontend
 //   credentials: true,               // <- required for cookies/auth headers
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
