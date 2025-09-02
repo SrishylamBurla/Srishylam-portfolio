@@ -20,7 +20,7 @@ function App() {
           top: 0,
           left: 0,
           right: 0,
-          height: 2,
+          height: 3,
           originX: 0,
           zIndex: 60,
           backgroundImage: "linear-gradient(to right, #1C6EA4, #f87171, #437057, #67C090, #124170, #6A0066)",
