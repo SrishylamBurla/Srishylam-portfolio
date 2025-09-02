@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const subscribeApi = createApi({
   reducerPath: "subscribeApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://srishylam-portfolio.onrender.com/api",
-    credentials: "include",
+    baseUrl: "https://srishylam-portfolio-1.onrender.com/api",
+    // credentials: "include",
   }),
   endpoints: (builder) => ({
     subscribeUser: builder.mutation({

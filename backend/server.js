@@ -12,18 +12,13 @@ const MONGO_URI = process.env.MONGO_URI;
 const app = express();
 
 app.use(express.json());
-const allowedOrigins = ['http://localhost:3000', 'https://srishylam-portfolio-2722.vercel.app/'];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
-
+  origin: 'https://srishylam-portfolio-2722.vercel.app/', // or your deployed frontend
+//   credentials: true,               // <- required for cookies/auth headers
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+}))
 
 mongoose
   .connect(MONGO_URI)
